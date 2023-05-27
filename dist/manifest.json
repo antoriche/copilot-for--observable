@@ -19,7 +19,14 @@
 
   "permissions": ["storage"],
 
-  "host_permissions": ["*://*.example.com/*"],
+  "host_permissions": ["*://observablehq.com/d/*"],
+
+  "content_scripts": [
+    {
+        "matches": ["*://observablehq.com/d/*"],
+        "js": ["scripts/entrypoint.js"]
+    }
+],
 
   "commands": {
     "_execute_action": {
