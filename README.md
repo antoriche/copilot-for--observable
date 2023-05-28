@@ -1,61 +1,20 @@
-<div align="center">
-<img src="./dist/assets/icons/icon128.png" alt="Web Extension Template" \>
-</div>
+![logo](./dist/assets/icons/icon128.png)
+# Copilot for ObservableHQ
+<small>Based on template [by divshekhar](https://github.com/divshekhar/web-extension-template)</small>
 
-# Web Extension Template
+This extention aim to provide code autocompletion for [observablehq](https://observablehq.com/)  
+This is using OpenAI text completion model and user should provide an API Key  
 
-![build](https://github.com/divshekhar/web-extension-template/workflows/build/badge.svg)
-
-Template for developing Chrome Web Extension using TypeScript.
-
-## :sparkle: Template Includes
-
-* TypeScript
-* Webpack
-* React
-* Jest
-* ES Lint
-* Prettier
-* Husky
-* Example
-  * Popup (Hello World)
-
-## :open_file_folder: Project Structure
-
-* **src/**:  TypeScript source files
-* **src/assets**: Static files
-  * **src/assets/images/**: Image files
-* **dist**: Chrome Extension directory
-* **dist/scripts**: Generated JavaScript files
-
-## :hammer: Setup
+## :hammer: Setup the project
 
 ```bash
-npm install
+git clone https://github.com/antoriche/copilot-for-observable # clone the project
+cd copilot-for-observable
+npm install # Install dependencies
+npm run watch # Rebuild on file update
 ```
-
-## :shield: Build
-
-```bash
-npm run build
-```
-
-## :eye_speech_bubble: Watch mode
-
-```bash
-npm run watch
-```
-
-### :vs: Visual Studio Code
-
-Run watch mode.
-
-type `Ctrl + Shift + B`
 
 ## :computer: Load extension to chrome
-
-Load `dist` directory
-
-## :gear: Test
-
-`npx jest` or `npm run test`
+Open [chrome://extensions/](chrome://extensions/) and enable developer mode  
+Load a new extention and point to the `dist` directory in this project  
+You should click on `update` to reload the extention to apply changes  

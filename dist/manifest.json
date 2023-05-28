@@ -1,19 +1,18 @@
 {
   "manifest_version": 3,
 
-  "name": "Web-Extension-Template",
-  "description": "Chrome Extension using TypeScript",
-  "version": "1.0",
-  "author": "Divyanshu Shekhar",
+  "name": "Copilot for Observable",
+  "description": "A code autocompletion plugin for ObservableHQ",
+  "version": "0.1",
+  "author": "Antonin Riche",
 
   "icons": {
-    "16": "assets/icons/icon16.png",
-    "32": "assets/icons/icon32.png",
-    "128": "assets/icons/icon128.png"
+    "128": "assets/icons/icon128.png",
+    "192": "assets/icons/icon192.png"
   },
 
   "action": {
-    "default_icon": "./assets/icons/icon16.png",
+    "default_icon": "./assets/icons/icon128.png",
     "default_popup": "popup.html"
   },
 
@@ -26,14 +25,5 @@
         "matches": ["*://observablehq.com/d/*"],
         "js": ["scripts/entrypoint.js"]
     }
-],
-
-  "commands": {
-    "_execute_action": {
-      "suggested_key": {
-        "default": "Ctrl+U",
-        "mac": "Command+U"
-      }
-    }
-  }
+]
 }

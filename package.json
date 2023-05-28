@@ -1,17 +1,16 @@
 {
-  "name": "web-extension-template",
-  "version": "1.0.0",
-  "description": "Template for developing web extenstion using TypeScript",
+  "name": "copilot-for-observable",
+  "version": "0.1",
+  "description": "A code autocompletion plugin for ObservableHQ",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/divshekhar/web-extension-template.git"
+    "url": "https://github.com/antoriche/copilot-for-observable"
   },
-  "author": "Divyanshu Shekhar",
+  "author": "Antonin Riche",
   "license": "Apache",
   "bugs": {
-    "url": "https://github.com/divshekhar/web-extension-template/issues"
+    "url": "https://github.com/antoriche/copilot-for-observable/issues"
   },
-  "homepage": "https://github.com/divshekhar/web-extension-template#readme",
   "scripts": {
     "start": "webpack --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
