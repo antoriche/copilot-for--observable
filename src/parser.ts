@@ -8,57 +8,51 @@ type NotebookCell = {
     active: boolean;
 };
 
-export function parsePage():NotebookCell[] {
+export async function loadNotebook():Promise<string> {
     const ret:NotebookCell[] = []
 
+    const notebookId = window.location.pathname.split('/')[2]
 
-            /*
-        select all .observablehq--worker elements
-        find .observablehq--inspect element
-        pick all contents from chidren (nested) elements and join them
-        */
-        /**console.log('observablehq--worker',$('.observablehq--worker').length)
-        $('.observablehq--worker').each((i, node) => {
-        const cell = {
-            id: $(node).attr('id')||"",
-            type: 'javascript' as const,
-            content: '',
-            preview: '',
-            active: false
-        }
-
-        const preview = $(node).find('.observablehq--inspect').text()
-        console.log('preview',preview)
-
-        ret.push(cell)
-    })  */
-
-
-    //select elements having attr data-node-id
+    let notebook = await (await fetch(`https://api.observablehq.com/d/${notebookId}.js`)).text()
+    notebook = notebook.split('m0 = ')[1].split('\nconst m1')[0].split('\n').map(l=>l.trim()).filter(l=>l.length>0).join('\n')
     
-    $( '[data-node-id]').each((i, node) => {
-        const cell = {
-            id: $(node).attr('data-node-id')||"",
-            type: 'javascript' as const,
-            content: '',
-            preview: '',
-            active: false
+    return notebook
+}
+
+export function getCurrentCell():string {
+    const activeLine = $('.node-hover .cm-activeLine')
+    const activeLineIndex = activeLine.parent().children().index(activeLine)
+    const lines = activeLine.parent().children().filter((i, el) => {
+        return i <= activeLineIndex
+    }).toArray().map((el) => {
+        return $(el).text()
+    }).join('\n')
+    return lines;
+}
+
+export function injectPredictionPreview(prediction:string | null) {
+    console.log('injectPredictionPreview', prediction)
+    $('head').remove('#prediction_style')
+    $('.prediction').removeClass('prediction')
+    if(!prediction) return;
+
+    $('head').append(`<style id="prediction_style">
+        .prediction:after {
+            content: '${prediction.replace("'", "\\'")}';
+            color: lightgrey;
         }
+    </style>`);
 
+    const activeLine = $('.node-hover .cm-activeLine')   
+    const lastChild = activeLine.children().last()
+    lastChild.addClass('prediction')
+}
 
-        const editor = $(node).find('.cm-editor');
-        if(!editor.length) return
-        const lines = editor.find('[role=textbox]').find('.cm-line');
-        
-        if (lines.filter('.cm-activeLine').length > 0) {
-            cell.active = true;
-        }
+export function injectPrediction(prediction:string) {
+    $('head').remove('#prediction_style')
+    $('.prediction').removeClass('prediction')
 
-        cell.content = lines.map((i, line) => {
-            return $(line).text();
-        }).toArray().join('\n');
-
-        ret.push(cell)
-    })  
-    return ret
+    const activeLine = $('.node-hover .cm-activeLine')   
+    const lastChild = activeLine.children().last()
+    lastChild.append(prediction)
 }
